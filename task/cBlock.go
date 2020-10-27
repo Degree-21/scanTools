@@ -1,6 +1,6 @@
 package task
 
-type CIntserface interface {
+type CBlocker interface {
 
 	Run()
 }
@@ -9,7 +9,7 @@ type CBlock struct {
 	ip string
 }
 
-func NewCBlock(addr string) CIntserface {
+func NewCBlock(addr string) CBlocker {
 	c := CBlock{ip:addr}
 	return  &c
 }

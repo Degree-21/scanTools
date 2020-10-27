@@ -13,7 +13,7 @@ import (
 	"sync"
 )
 
-type PortScan interface {
+type PortScanTasker interface {
 	addrToIp(addr string) (string, error)
 	getPortList() ([]string, error)
 	getScanThreadNum() (num int64, err error)
@@ -35,7 +35,7 @@ type PortScanTask struct {
 	portList []string
 }
 
-func NewPortTask(addr string) PortScan {
+func NewPortTask(addr string) PortScanTasker {
 	task := PortScanTask{}
 	ip, err := task.addrToIp(addr)
 	if err != nil {

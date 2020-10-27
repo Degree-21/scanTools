@@ -1,7 +1,6 @@
 package main
 
 import (
-	"blast/lib"
 	"blast/task"
 	"os"
 
@@ -13,18 +12,13 @@ import (
 const (
 	PortScan = "port"
 	CBlockScan = "c"
+	DomainScan = "domain"
 )
 
-type ScanFlag struct {
-	ip string
-	scanType string
-}
 
-var Scan ScanFlag
 
 var ScanType string
 var ScanAddr string
-var ScanFile string
 
 func initFlag(){
 	fmt.Println("task start")
@@ -46,10 +40,13 @@ func main(){
 		portTask.Run()
 		os.Exit(1)
 	}else if ScanType == CBlockScan && ScanAddr != "" {
-		cTask := task.NewCBlock(ScanAddr)
+		//cTask := task.NewCBlock(ScanAddr)
+	}else if ScanType == DomainScan && ScanAddr != ""{
+		domainTask := task.NewDomainTask(ScanAddr)
+		domainTask.Run()
 	}
 
-	lib.Ping("192.187.0.100")
+	//lib.Ping("192.187.0.100")
 
 	//子网存活扫描
 
